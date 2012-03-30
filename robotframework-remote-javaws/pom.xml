@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.codecentric.robotframework</groupId>
+	<artifactId>robotframework-remote-javaws</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>robotframework</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.robotframework</groupId>
+			<artifactId>remoteapplications</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<id>getDependencies</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+						  <artifactItems>
+			                <artifactItem>
+			                  <groupId>${project.groupId}</groupId>
+			                  <artifactId>${project.artifactId}</artifactId>
+			                  <version>${project.version}</version>	
+			                  <outputDirectory>${project.build.directory}/testlibs</outputDirectory>                 
+			                </artifactItem>
+			                <artifactItem>
+							  <groupId>org.robotframework</groupId>
+							  <artifactId>swinglibrary</artifactId>
+						      <version>1.2</version>
+			                  <outputDirectory>${project.build.directory}/testlibs</outputDirectory>                 
+			                </artifactItem>			                		                
+			              </artifactItems>			              
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>				
+		</plugins>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+			
+	<profiles>
+		<profile>
+			<id>run-tests</id>
+			<activation>
+				<property>
+					<name>maven.env-profile</name>
+					<value>run-tests</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<executions>
+							<execution>
+								<id>robot</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>java</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<!-- executable>java</executable-->
+							<mainClass>org.robotframework.RobotFramework</mainClass>
+							<arguments>		
+								<!-- configure workspace root for Library Locations-->
+								<argument>--variable</argument>
+								<argument>WORKSPACE_ROOT:${project.basedir}</argument>									
+								<!-- configure the reporting -->
+								<argument>--outputdir</argument>
+								<argument>target</argument>				
+								<!-- configure robot testcase location-->
+								<argument>${project.basedir}/src/main/robot/suite</argument>
+							</arguments>
+						</configuration>
+					</plugin>	
+				</plugins>
+			</build>
+		</profile>	
+		<profile>
+			<id>environment-a</id>
+			<properties>
+				<SERVER>testserver</SERVER>
+			</properties>
+		</profile>
+	</profiles>	
+
+	<repositories>
+	    <repository>
+	      <id>laughingpanda</id>
+	      <url>http://maven.laughingpanda.org/maven2</url>
+	      <releases><enabled>true</enabled></releases>
+	      <snapshots><enabled>true</enabled></snapshots>
+	    </repository>
+  	</repositories>
+</project>
