@@ -1,0 +1,1 @@
+java -cp selenium/selenium-server-standalone-2.16.1.jar org.openqa.selenium.server.SeleniumServer -port 4444 -singlewindow

@@ -1,0 +1,22 @@
+*** Settings ***
+Documentation   Import der SeleniumLibrary, um eine homogene Anbindung zu gewährleisten. Zusätzlich werden noch einige andere, hilfreiche Keywords implementiert. 
+Library         String
+Library         SeleniumLibrary  15s  ${SELENIUM_SERVER_HOST}  ${SELENIUM_PORT}
+
+
+*** Keywords ***
+Init Browser
+	Open Browser  ${BASE_URL}  ${BROWSER_PROFILE}
+	Delete All Cookies
+	
+Log Screenshot
+	Log  Browser-Profil: '${BROWSER_PROFILE}'
+	${isChrome} =				Evaluate  '${BROWSER_PROFILE}'.count('googlechrome') > 0
+	${isIE} =					Evaluate  '${BROWSER_PROFILE}'.count('ie') > 0
+	${isInternetExplorer} =		Evaluate  '${BROWSER_PROFILE}'.count('internetexplorer') > 0
+	Log  ${isChrome} ${isIE} ${isInternetExplorer}
+    Run Keyword If  	${isChrome} or ${isIE} or ${isInternetExplorer}		Capture Screenshot
+    Run Keyword Unless  ${isChrome} or ${isIE} or ${isInternetExplorer}		Capture Page Screenshot
+
+Teardown Selenium
+    Run Keyword If Test Failed  Log Screenshot

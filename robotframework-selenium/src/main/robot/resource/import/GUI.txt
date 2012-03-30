@@ -1,0 +1,2 @@
+*** Settings ***
+Resource        ${RESOURCES}/objects/common-keywords.txt

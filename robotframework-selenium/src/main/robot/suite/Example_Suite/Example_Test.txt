@@ -1,0 +1,16 @@
+*** Settings ***
+Resource        ${RESOURCES}/import/GUI.txt
+Suite Setup     Setup Suite
+Suite Teardown  Teardown Suite
+Test Setup		Start Test
+Test Teardown   Stop Test
+	
+	
+*** Test Cases ***
+Codecentric impressum contains valid hrb number
+	
+	Given codecentric homepage is open
+	
+	When the user clicks on the impressum
+	
+	Then it contains a valid hrb number

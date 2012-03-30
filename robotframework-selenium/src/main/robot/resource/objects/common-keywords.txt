@@ -1,0 +1,47 @@
+*** Settings ***
+Resource        ${RESOURCES}/adapter/SeleniumLibrary_Adapter.txt
+
+
+*** Keywords ***
+
+###########################################################
+### Given: Es existiert/existieren / Und weiterhin ...  ###
+###########################################################
+
+codecentric homepage is open
+	Go To  ${BASE_URL}
+	
+#################################
+### When: Wenn / Und dann ... ###
+#################################	
+
+the user clicks on the impressum
+	Click Link  Impressum
+
+###############################
+### Then: Dann / Und es ... ###
+###############################
+	
+it contains a valid hrb number	
+	Current Frame Contains  HRB 63043
+		
+##########################
+###  Utility Keywords  ###
+##########################
+
+		
+##########################
+###  Setup / Teardown  ###
+##########################
+
+Setup Suite
+	Init Browser
+
+Teardown Suite
+	Close Browser
+
+Start Test
+	No operation
+		
+Stop Test
+	Teardown Selenium
