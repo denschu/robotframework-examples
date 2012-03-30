@@ -1,0 +1,1 @@
+pybot --variable RESOURCES:src\main\robot\resource --outputdir "target\robot"  src\main\robot\suite

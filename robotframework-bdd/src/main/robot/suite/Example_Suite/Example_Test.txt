@@ -1,0 +1,17 @@
+*** Settings ***
+Resource        ${RESOURCES}/import/common.txt
+Test Template   Behaviour
+	
+*** Keyword ***
+Behaviour  [Arguments]  ${username}  ${password}
+	
+	Given login page is open
+	
+	When valid username ${username} and password ${password} are inserted
+	and credentials are submitted
+	
+	Then welcome page should be open
+
+| *Test Case*          | *username* 		         | *password*  		  					
+| Invalid User Name    | invalid                     | abcd     					
+| Invalid Password     | user001                     | invalid

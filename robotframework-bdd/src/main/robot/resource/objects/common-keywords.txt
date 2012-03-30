@@ -1,0 +1,35 @@
+*** Keywords ***
+
+###########################################################
+### Given: Es existiert/existieren / Und weiterhin ...  ###
+###########################################################
+
+login page is open
+	No operation
+
+	
+	
+#################################
+### When: Wenn / Und dann ... ###
+#################################	
+
+valid username ${username} and password ${password} are inserted
+	No operation
+	
+credentials are submitted
+	No operation
+		
+###############################
+### Then: Dann / Und es ... ###
+###############################
+	
+welcome page should be open	
+	No operation
+	
+##########################
+###  Utility Keywords  ###
+##########################
+		
+##########################
+###  Setup / Teardown  ###
+##########################
