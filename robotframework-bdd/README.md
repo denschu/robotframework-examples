@@ -1,1 +1,0 @@
-== Robotframework and BDD - Demo ==
