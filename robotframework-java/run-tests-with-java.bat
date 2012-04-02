@@ -1,1 +1,0 @@
-java -cp lib/robotframework-2.6.3.jar org.robotframework.RobotFramework --variable RESOURCES:src\main\robot\resource --outputdir "target\robot" src\main\robot\suite

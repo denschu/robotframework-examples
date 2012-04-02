@@ -1,0 +1,1 @@
+java -cp lib/robotframework-2.6.3-SL28.jar org.robotframework.RobotFramework --variablefile settings_local.py --variable RESOURCES:src\main\robot\resource --outputdir "target\robot" src\main\robot\suite
